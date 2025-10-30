@@ -1,0 +1,471 @@
+/* --- CSS Variables & General Setup --- */
+/* Variables make it easy to change colors across the site from one place */
+:root {
+    --primary-bg: #0d0d0d;      /* Main dark background */
+    --secondary-bg: #1a1a1a;    /* Lighter background for cards */
+    --text-light: #f0f0f0;      /* Main text color */
+    --text-medium: #a0a0a0;     /* Secondary text color */
+    --glow-shadow: 0 0 5px #ff00de, 0 0 10px #ff00de, 0 0 20px #ff00de, 0 0 40px #00c3ff, 0 0 80px #00c3ff; /* The RGB glow effect */
+}
+
+/* A universal reset for consistent styling across browsers */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Enables smooth scrolling when clicking on anchor links (e.g., nav links) */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Basic body styling */
+body {
+    font-family: 'Poppins', sans-serif; /* A clean, modern font */
+    background-color: var(--primary-bg);
+    color: var(--text-light);
+    overflow-x: hidden; /* Prevents horizontal scrolling */
+}
+
+/* A standard container to center content and add padding */
+.container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 4rem 2rem;
+}
+
+/* Styling for main section titles (e.g., "OUR PRODUCTS") */
+.section-title {
+    font-family: 'Orbitron', sans-serif; /* A futuristic, gaming-style font */
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 3rem;
+    text-transform: uppercase;
+    animation: rgb-text-glow 2s infinite alternate; /* Apply glowing animation */
+}
+
+.section-title span {
+    animation: rgb-text-glow-alt 2s infinite alternate; /* A slightly different glow for the second word */
+}
+
+
+/* --- RGB Glow Animations --- */
+/* These @keyframes define the animations used throughout the site */
+
+/* Animation for glowing text */
+@keyframes rgb-text-glow {
+    from { text-shadow: 0 0 10px #00c3ff, 0 0 20px #00c3ff; }
+    to { text-shadow: 0 0 10px #ff00de, 0 0 20px #ff00de; }
+}
+@keyframes rgb-text-glow-alt {
+    from { text-shadow: 0 0 10px #ff00de, 0 0 20px #ff00de; }
+    to { text-shadow: 0 0 10px #00c3ff, 0 0 20px #00c3ff; }
+}
+
+/* Animation for glowing borders */
+@keyframes rgb-border-glow {
+    0% { border-color: #ff0000; box-shadow: 0 0 5px #ff0000; }
+    25% { border-color: #00ff00; box-shadow: 0 0 5px #00ff00; }
+    50% { border-color: #0000ff; box-shadow: 0 0 5px #0000ff; }
+    75% { border-color: #ff00ff; box-shadow: 0 0 5px #ff00ff; }
+    100% { border-color: #ff0000; box-shadow: 0 0 5px #ff0000; }
+}
+
+
+/* --- Header & Navbar --- */
+/* The header is fixed to the top of the page */
+header {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000; /* Ensures the header is above other content */
+    background: rgba(13, 13, 13, 0.8); /* Semi-transparent background */
+    backdrop-filter: blur(10px); /* Frosted glass effect */
+    transition: background 0.3s ease;
+}
+
+/* The navigation bar itself */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 70px;
+    max-width: 1300px;
+    margin: auto;
+    padding: 0 2rem;
+}
+
+/* Logo styling */
+.logo {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.8rem;
+    text-decoration: none;
+    color: var(--text-light);
+}
+.logo span {
+    animation: rgb-text-glow 2s infinite alternate;
+}
+
+/* Navigation links container */
+.nav-links {
+    display: flex;
+    list-style: none;
+}
+.nav-links li {
+    padding: 0 1rem;
+}
+.nav-links a {
+    color: var(--text-medium);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+    position: relative;
+}
+.nav-links a:hover {
+    color: var(--text-light);
+}
+
+/* Underline effect on hover for nav links */
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #ff00de, #00c3ff);
+    bottom: -5px;
+    left: 0;
+    transition: width 0.3s ease;
+}
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+/* Container for cart button and hamburger menu */
+.nav-extra {
+    display: flex;
+    align-items: center;
+}
+
+/* Cart button styling */
+.cart-btn {
+    background: linear-gradient(90deg, #ff00de, #00c3ff);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    margin-right: 1.5rem;
+}
+.cart-btn:hover {
+    transform: scale(1.05);
+    box-shadow: var(--glow-shadow);
+}
+
+/* Hamburger menu icon (hidden on desktop) */
+.hamburger {
+    display: none;
+    cursor: pointer;
+}
+.hamburger div {
+    width: 25px;
+    height: 3px;
+    background-color: var(--text-light);
+    margin: 5px;
+    transition: all 0.3s ease;
+}
+
+
+/* --- Hero Section --- */
+.hero {
+    min-height: 100vh; /* Takes up the full viewport height */
+    background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('images/hero-background.jpg') no-repeat center center/cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0 2rem;
+}
+
+.hero-content h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    animation: rgb-text-glow 2.5s infinite alternate;
+}
+
+.hero-content p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    color: var(--text-medium);
+}
+
+/* Call-to-action button in the hero section */
+.cta-button {
+    display: inline-block;
+    padding: 1rem 2.5rem;
+    border: 2px solid #ff00de;
+    border-radius: 50px;
+    color: var(--text-light);
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    animation: rgb-border-glow 4s linear infinite;
+}
+.cta-button:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: scale(1.05);
+    box-shadow: var(--glow-shadow);
+}
+
+
+/* --- About Section --- */
+.about-content {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+.about-content img {
+    max-width: 400px;
+    border-radius: 10px;
+    animation: rgb-border-glow 8s linear infinite;
+    border: 3px solid;
+}
+.about-content p {
+    line-height: 1.8;
+    color: var(--text-medium);
+    font-size: 1.1rem;
+}
+
+
+/* --- Product Section --- */
+/* Grid layout for product cards */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid */
+    gap: 2rem;
+}
+
+/* Individual product card styling */
+.product-card {
+    background: var(--secondary-bg);
+    border-radius: 15px;
+    overflow: hidden;
+    text-align: center;
+    padding: 1.5rem;
+    border: 1px solid #333;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.product-card:hover {
+    transform: translateY(-10px); /* Lifts the card up on hover */
+    box-shadow: 0 0 15px rgba(0, 195, 255, 0.5), 0 0 30px rgba(255, 0, 222, 0.5);
+}
+.product-card img {
+    max-width: 100%;
+    height: 200px;
+    object-fit: contain; /* Ensures image fits without distortion */
+    margin-bottom: 1rem;
+    transition: transform 0.3s ease;
+}
+.product-card:hover img {
+    transform: scale(1.1); /* Zooms the image on hover */
+}
+.product-card h3 {
+    font-family: 'Orbitron', sans-serif;
+    margin-bottom: 0.5rem;
+}
+.product-card p {
+    color: var(--text-medium);
+    margin-bottom: 1rem;
+    min-height: 40px; /* Ensures all cards have same height */
+}
+.price {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    color: #00c3ff;
+}
+.add-to-cart {
+    background: none;
+    border: 2px solid #ff00de;
+    color: #ff00de;
+    padding: 0.7rem 1.5rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+.add-to-cart:hover {
+    background: #ff00de;
+    color: white;
+    box-shadow: 0 0 15px #ff00de;
+}
+
+
+/* --- Review & Q&A Sections --- */
+.review-card {
+    background: var(--secondary-bg);
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+    border-left: 5px solid;
+    border-image: linear-gradient(to bottom, #ff00de, #00c3ff) 1;
+}
+.review-card p {
+    font-style: italic;
+    color: var(--text-medium);
+}
+.review-card h4 {
+    text-align: right;
+    margin-top: 1rem;
+}
+
+/* Q&A Accordion styles */
+.qa-item {
+    margin-bottom: 1rem;
+    background: var(--secondary-bg);
+    border-radius: 5px;
+}
+.qa-question {
+    width: 100%;
+    padding: 1rem;
+    background: none;
+    border: none;
+    color: var(--text-light);
+    font-size: 1.1rem;
+    text-align: left;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.qa-question::after {
+    content: '\f078'; /* Font Awesome down arrow icon */
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    transition: transform 0.3s ease;
+}
+.qa-item.active .qa-question::after {
+    transform: rotate(180deg); /* Flips the arrow when active */
+}
+.qa-answer {
+    max-height: 0; /* Hidden by default */
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+}
+.qa-answer p {
+    padding: 0 1rem 1rem 1rem;
+    color: var(--text-medium);
+    line-height: 1.6;
+}
+
+
+/* --- Footer --- */
+footer {
+    background-color: var(--secondary-bg);
+    text-align: center;
+    padding: 2rem;
+    margin-top: 2rem;
+}
+.social-icons a {
+    color: var(--text-medium);
+    font-size: 1.5rem;
+    margin: 0 1rem;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+.social-icons a:hover {
+    color: #00c3ff;
+    transform: scale(1.2);
+}
+footer p {
+    margin-top: 1rem;
+    color: #666;
+}
+
+
+/* --- Mobile Buy Now Button --- */
+.mobile-buy-now {
+    display: none; /* Hidden on desktop */
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(90deg, #ff00de, #00c3ff);
+    color: white;
+    text-align: center;
+    padding: 1rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-decoration: none;
+    z-index: 999;
+}
+
+
+/* --- Scroll Animation --- */
+/* This class is applied to elements that will animate when scrolled into view */
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+.animate-on-scroll.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+/* --- Responsive (Mobile Version) --- */
+/* This media query applies styles only for screens 768px wide or smaller */
+@media screen and (max-width: 768px) {
+    /* Styles for the mobile navigation menu (slide-in from right) */
+    .nav-links {
+        position: absolute;
+        right: 0px;
+        height: 92vh;
+        top: 70px;
+        background: var(--primary-bg);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+        width: 60%;
+        transform: translateX(100%); /* Hidden off-screen by default */
+        transition: transform 0.5s ease-in;
+    }
+    .nav-links.nav-active {
+        transform: translateX(0%); /* Slides into view */
+    }
+
+    /* Shows the hamburger icon on mobile */
+    .hamburger {
+        display: block;
+    }
+
+    /* Animation for hamburger icon to turn into an 'X' */
+    .toggle .line1 {
+        transform: rotate(-45deg) translate(-5px, 6px);
+    }
+    .toggle .line2 {
+        opacity: 0;
+    }
+    .toggle .line3 {
+        transform: rotate(45deg) translate(-5px, -6px);
+    }
+    
+    /* Adjusting font size for hero section on smaller screens */
+    .hero-content h1 {
+        font-size: 2.5rem;
+    }
+    
+    /* Stacking about section content vertically on mobile */
+    .about-content {
+        flex-direction: column;
+    }
+
+    /* Shows the mobile "Buy Now" button */
+    .mobile-buy-now {
+        display: block;
+    }
+}	
